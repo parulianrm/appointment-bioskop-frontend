@@ -23,7 +23,16 @@ export default function PickOptionSection() {
           </Row>
         </Col>
         <Col md={5}>
-          <BookingResult />
+          <BookingResult>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Jumlah Tiket</option>
+              <option value="1">Satu</option>
+              <option value="2">Dua</option>
+              <option value="3">Tiga</option>
+              <option value="4">Empat</option>
+              <option value="5">Lima</option>
+            </select>
+          </BookingResult>
         </Col>
       </Row>
     </>

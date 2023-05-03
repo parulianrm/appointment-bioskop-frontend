@@ -10,7 +10,6 @@ export default function TicketBooking() {
       <DescriptionSection />
       <PickDateSection />
       <PickOptionSection />
-      <PickSeat />
     </Container>
   );
 }
