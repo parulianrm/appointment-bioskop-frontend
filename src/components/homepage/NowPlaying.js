@@ -3,9 +3,9 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 const NowPlaying = () => {
   return (
-    <Container className='NowPlaying'>
-      <h2 className='text-align-center'>Now Playing</h2>
-      <Row className="now-playing">
+    <Container className='NowPlaying' style={{marginTop: '70px'}}>
+      <h2 className='NowPlaying' style={{ textAlign: 'center', fontWeight: 'bold'}}>Now Playing</h2>
+      <Row className="now-playing" style={{marginTop: '30px'}}>
         
         <Col md={2} className="mb-4">
           <Card>
@@ -16,7 +16,6 @@ const NowPlaying = () => {
             </Card.Body>
           </Card>
         </Col>
-
         <Col md={2} className="mb-4">
           <Card>
             <Card.Img variant="top" src="https://via.placeholder.com/400x300.png" />
@@ -46,7 +45,7 @@ const NowPlaying = () => {
             </Card.Body>
           </Card>
         </Col>
-
+        
         <Col md={2} className="mb-4">
           <Card>
             <Card.Img variant="top" src="https://via.placeholder.com/400x300.png" />

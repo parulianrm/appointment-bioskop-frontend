@@ -3,8 +3,8 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 const ComingSoon = () => {
   return (
-    <Container className="mt-5" style={{marginTop: '200px'}}>
-      <h2 className="text-center mb-4">Coming Soon</h2>
+    <Container className="mt-7" style={{marginTop: '200px'}}>
+      <h2 className="CoomingSoon" style={{ textAlign: 'center', fontWeight: 'bold'}}>Coming Soon</h2>
       <Row className="justify-content-center">
         <Col md={3} className="mb-4">
           <Card>

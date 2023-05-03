@@ -1,5 +1,5 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import BookingResult from './BookingResult';
+import BookingResult from '../ticket-booking/BookingResult';
 
 export default function PickSeat() {
   const col = 8;
@@ -64,12 +64,12 @@ export default function PickSeat() {
               <Row>
                 <Col>
                   <Form.Group className="mb-3" controlId="seatForm.name">
-                    <Form.Control type="text" placeholder="nama" />
+                    <Form.Control type="text" placeholder="Nama" />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group className="mb-3" controlId="seatForm.telephone">
-                    <Form.Control type="text" placeholder="telephone" />
+                    <Form.Control type="text" placeholder="Telepon" />
                   </Form.Group>
                 </Col>
               </Row>

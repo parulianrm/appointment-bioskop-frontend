@@ -6,7 +6,7 @@ import Intro from './components/homepage/Intro';
 import NowPlaying from './components/homepage/NowPlaying';
 import ComingSoon from './components/homepage/ComingSoon';
 import Footer from './components/homepage/Footer';
-import PilihKursi from './components/pilih-kursi/pilihKursi';
+import PickSeat from './components/pick-seat/PickSeat';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <ComingSoon />
       <Footer />
       <TicketBooking />
-      <PilihKursi />
+      <PickSeat />
     </div>
   );
 }
