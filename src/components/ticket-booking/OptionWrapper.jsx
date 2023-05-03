@@ -1,29 +1,21 @@
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
-export default function OptionWrapper() {
+export default function OptionWrapper({ title }) {
   return (
     <>
-      <h4 style={{ textAlign: 'left', fontWeight: 'bold' }}>
-        Studio Regular Rp.50.000
-      </h4>
-      <div className="d-grid gap-2 col-3">
-        <Row>
-          <Col>
-            <Button variant="primary" size="lg">
-              Block level button
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="primary" size="lg">
-              Block level button
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="primary" size="lg">
-              Block level button
-            </Button>
-          </Col>
-        </Row>
+      <h4 style={{ textAlign: 'left', fontWeight: 'bold' }}>{title}</h4>
+      <div className="action-button d-flex gap-2 flex-wrap">
+        <Button variant="primary" size="lg">
+          10:00
+        </Button>
+
+        <Button variant="primary" size="lg">
+          11:00
+        </Button>
+
+        <Button variant="primary" size="lg">
+          15:00
+        </Button>
       </div>
     </>
   );

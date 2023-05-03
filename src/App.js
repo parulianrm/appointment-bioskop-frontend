@@ -8,6 +8,7 @@ import ComingSoon from './components/homepage/ComingSoon';
 import Footer from './components/homepage/Footer';
 import PilihKursi from './components/pilih-kursi/pilihKursi';
 
+
 function App() {
   return (
     <div className="App">
