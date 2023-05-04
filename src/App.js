@@ -1,24 +1,20 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TicketBooking from './pages/TicketBooking';
-import Header from './components/homepage/Header';
-import Intro from './components/homepage/Intro';
-import NowPlaying from './components/homepage/NowPlaying';
-import ComingSoon from './components/homepage/ComingSoon';
-import Footer from './components/homepage/Footer';
 import PickSeat from './components/pick-seat/PickSeat';
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import Header from './components/homepage/Header';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Intro />
-      <NowPlaying />
-      <ComingSoon />
-      <Footer />
-      <TicketBooking />
-      <PickSeat />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/book-ticket" element={<TicketBooking />} />
+        <Route path="/pick-seat" element={<PickSeat />} />
+      </Routes>
     </div>
   );
 }

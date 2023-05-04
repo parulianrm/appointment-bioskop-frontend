@@ -1,5 +1,6 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import BookingResult from '../ticket-booking/BookingResult';
+import { Container } from 'react-bootstrap';
 
 export default function PickSeat() {
   const col = 8;
@@ -7,12 +8,12 @@ export default function PickSeat() {
 
   function productSeatTemplate() {
     const arr = [];
-    for (let i = 0; i < row; i++) {
+    for (let a = row; a >= 0; a--) {
       arr.push(
         <Row className="mt-3">
           {(() => {
             const arr = [];
-            for (let i = 1; i < col; i++) {
+            for (let i = col; i > 0; i--) {
               arr.push(
                 <Col>
                   <button
@@ -20,7 +21,7 @@ export default function PickSeat() {
                     style={{ width: '100%' }}
                     type="button"
                   >
-                    1
+                    {`${String.fromCharCode(97 + a).toUpperCase()}${i}`}
                   </button>
                 </Col>
               );
@@ -34,12 +35,15 @@ export default function PickSeat() {
   }
 
   return (
-    <>
-      <h3 style={{ textAlign: 'left', fontWeight: 'bold' }}>
-        Pick Seat (2 Seat)
-      </h3>
+    <Container className="pt-5 mt-4">
       <Row className="mt-4">
-        <Col md={7}>
+        <Col md={7} className="px-5">
+          <h3
+            style={{ textAlign: 'left', fontWeight: 'bold' }}
+            className="mb-5"
+          >
+            Pick Seat (2 Seat)
+          </h3>
           <div className="seat-container-option">{productSeatTemplate()}</div>
           <div className="info-confirm mt-4">
             <Row>
@@ -77,6 +81,6 @@ export default function PickSeat() {
           </BookingResult>
         </Col>
       </Row>
-    </>
+    </Container>
   );
 }

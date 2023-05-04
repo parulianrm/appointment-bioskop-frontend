@@ -4,7 +4,7 @@ import flowerPict from '../../assets/images/flower-pict.jpg';
 export default function BookingResult({ children }) {
   return (
     <>
-      <Card>
+      <Card className="p-2">
         <Card.Img variant="top" src={flowerPict} />
         <ListGroup className="list-group-flush">
           <ListGroup.Item>Senin, 12 Agustus 2023</ListGroup.Item>
