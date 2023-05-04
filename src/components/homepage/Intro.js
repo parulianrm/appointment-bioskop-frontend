@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import bioskopPict from '../../assets/images/bioskop.jpg';
 
 const Intro = () => {
   return (
@@ -20,11 +21,7 @@ const Intro = () => {
         </Col>
         <Col md={6}>
           <Card style={{ marginTop: '50px' }}>
-            <Card.Img
-              className=""
-              variant="end-start"
-              src="https://via.placeholder.com/400x300.png"
-            />
+            <Card.Img className="" variant="end-start" src={bioskopPict} />
           </Card>
         </Col>
       </Row>

@@ -10,7 +10,7 @@ function Header() {
   }
 
   return (
-    <Navbar bg="transperant" expand="lg" d-flex>
+    <Navbar bg="transperant" expand="lg" className="d-flex">
       <Container>
         <Navbar.Brand href="#home">
           JagooIT MOVIE TICKET ONLINE BOOKING
