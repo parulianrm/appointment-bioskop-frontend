@@ -1,6 +1,7 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import BookingResult from '../ticket-booking/BookingResult';
 import { Container } from 'react-bootstrap';
+import flowerPic from '../../assets/images/flower-pict.jpg';
 
 export default function PickSeat() {
   const col = 8;
@@ -63,7 +64,7 @@ export default function PickSeat() {
           </div>
         </Col>
         <Col md={5}>
-          <BookingResult>
+          <BookingResult imgUrl={flowerPic}>
             <Form>
               <Row>
                 <Col>

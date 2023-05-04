@@ -1,11 +1,13 @@
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import flowerPict from '../../assets/images/flower-pict.jpg';
 
-export default function BookingResult({ children }) {
+export default function BookingResult({ children, imgUrl }) {
+  console.log(imgUrl);
+  let picture = imgUrl ? imgUrl : null;
   return (
     <>
       <Card className="p-2">
-        <Card.Img variant="top" src={flowerPict} />
+        <Card.Img variant="top" src={picture} alt="Gambar Result" />
         <ListGroup className="list-group-flush">
           <ListGroup.Item>Senin, 12 Agustus 2023</ListGroup.Item>
           <ListGroup.Item>Studio Executive Premier</ListGroup.Item>

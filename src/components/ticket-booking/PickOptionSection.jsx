@@ -2,7 +2,7 @@ import { Col, Row } from 'react-bootstrap';
 import OptionWrapper from './OptionWrapper';
 import BookingResult from './BookingResult';
 
-export default function PickOptionSection() {
+export default function PickOptionSection({ data }) {
   return (
     <>
       <Row className="mt-5 pt-2">
@@ -23,7 +23,9 @@ export default function PickOptionSection() {
           </Row>
         </Col>
         <Col md={5}>
-          <BookingResult>
+          <BookingResult
+            imgUrl={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
+          >
             <select class="form-select" aria-label="Default select example">
               <option selected>Jumlah Tiket</option>
               <option value="1">Satu</option>
