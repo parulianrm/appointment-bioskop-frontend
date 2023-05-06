@@ -11,14 +11,14 @@ export default function PickSeat() {
     const arr = [];
     for (let a = row; a >= 0; a--) {
       arr.push(
-        <Row className="mt-3">
+        <Row className="mt-3" key={`row${a}`}>
           {(() => {
             const arr = [];
             for (let i = col; i > 0; i--) {
               arr.push(
-                <Col>
+                <Col key={`col${a}${i}`}>
                   <button
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     style={{ width: '100%' }}
                     type="button"
                   >

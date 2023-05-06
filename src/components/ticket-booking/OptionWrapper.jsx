@@ -1,21 +1,26 @@
-import { Button } from 'react-bootstrap';
+import ButtonCustom from './ButtonCustom';
 
-export default function OptionWrapper({ title }) {
+export default function OptionWrapper({
+  title,
+  optionsData,
+  studioData,
+  changeSelectedData,
+  studio,
+}) {
   return (
     <>
       <h4 style={{ textAlign: 'left', fontWeight: 'bold' }}>{title}</h4>
       <div className="action-button d-flex gap-2 flex-wrap">
-        <Button variant="primary" size="lg">
-          10:00
-        </Button>
-
-        <Button variant="primary" size="lg">
-          11:00
-        </Button>
-
-        <Button variant="primary" size="lg">
-          15:00
-        </Button>
+        {optionsData.map((value, index) => (
+          <ButtonCustom
+            key={index}
+            size="medium"
+            color={studioData.id === value.id ? 'green' : 'blue'}
+            onClick={() => changeSelectedData(value.id, studio, value.time)}
+          >
+            {value.time}
+          </ButtonCustom>
+        ))}
       </div>
     </>
   );
