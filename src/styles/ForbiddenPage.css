@@ -1,0 +1,46 @@
+.container-forbidden {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 15rem);
+}
+
+.container-forbidden .card {
+  width: 30rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.container-forbidden .card h1 {
+  font-size: 3rem;
+  color: #dc3545;
+  margin-bottom: 2rem;
+}
+
+.container-forbidden .card p {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.container-forbidden .btn {
+  font-size: 1.25rem;
+  padding: 1rem 3rem;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+.container-forbidden .btn:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

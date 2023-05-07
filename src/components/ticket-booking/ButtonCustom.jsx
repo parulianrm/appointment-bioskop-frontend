@@ -6,6 +6,7 @@ const Button = ({
   children,
   size = 'medium',
   color = 'blue',
+  disabled,
   customSize,
 }) => {
   const getSizeClassName = (size) => {
@@ -29,6 +30,7 @@ const Button = ({
       className={`button ${sizeClassName} ${colorClassName}`}
       onClick={onClick}
       style={style}
+      disabled={disabled}
     >
       {children}
     </button>

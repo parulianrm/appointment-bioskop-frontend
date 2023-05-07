@@ -1,43 +1,29 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import BookingResult from '../ticket-booking/BookingResult';
 import { Container } from 'react-bootstrap';
-import flowerPic from '../../assets/images/flower-pict.jpg';
-import { useLocation } from 'react-router-dom';
+import ButtonCustom from '../ticket-booking/ButtonCustom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Grid from './Grid';
 
 export default function PickSeat() {
+  const navigate = useNavigate();
   const location = useLocation();
-  const filmData = location.state?.data?.filmData;
-  const orderData = location.state?.data?.orderData;
+  const [seat, setSeat] = useState([]);
+  const [name, setName] = useState('');
+  const [telephone, setTelephone] = useState('');
 
-  const col = 8;
-  const row = 5;
+  let filmData = location.state?.filmData;
+  let orderData = location.state?.orderData;
+  let pickSeatServe = orderData.totalTicket;
 
-  function productSeatTemplate() {
-    const arr = [];
-    for (let a = row; a >= 0; a--) {
-      arr.push(
-        <Row className="mt-3" key={`row${a}`}>
-          {(() => {
-            const arr = [];
-            for (let i = col; i > 0; i--) {
-              arr.push(
-                <Col key={`col${a}${i}`}>
-                  <button
-                    className="btn btn-primary"
-                    style={{ width: '100%' }}
-                    type="button"
-                  >
-                    {`${String.fromCharCode(97 + a).toUpperCase()}${i}`}
-                  </button>
-                </Col>
-              );
-            }
-            return arr;
-          })()}
-        </Row>
-      );
-    }
-    return arr;
+  function sendData() {
+    console.log({
+      name,
+      telephone,
+      filmData,
+      orderData,
+    });
   }
 
   return (
@@ -48,22 +34,30 @@ export default function PickSeat() {
             style={{ textAlign: 'left', fontWeight: 'bold' }}
             className="mb-5"
           >
-            Pick Seat (2 Seat)
+            Pilih total {pickSeatServe - seat.length} Kursi
           </h3>
-          <div className="seat-container-option">{productSeatTemplate()}</div>
+          <div className="seat-container-option">
+            <Grid
+              rows={6}
+              cols={8}
+              seat={seat}
+              pickSeatServe={pickSeatServe}
+              changeSeatData={(dataSeat) => setSeat(dataSeat)}
+            />
+          </div>
           <div className="info-confirm mt-4">
             <Row>
               <Button variant="primary">Layar</Button>
             </Row>
             <Row className="mt-3">
               <Col>
-                <Button variant="primary">Booked</Button>
+                <Button variant="primary">Tersedia</Button>
               </Col>
               <Col>
-                <Button variant="success">Tersedia</Button>
+                <Button variant="success">Booked</Button>
               </Col>
               <Col>
-                <Button variant="secondary">Pilihan Anda</Button>
+                <Button variant="danger">Pilihan Anda</Button>
               </Col>
             </Row>
           </div>
@@ -74,17 +68,26 @@ export default function PickSeat() {
             firstCol={`${orderData.dateData.day}, ${orderData.dateData.date} 2023`}
             secondCol={`Studio ${orderData.studioData.studio}`}
             thirdCol={`Jam ${orderData.studioData.time} WIB`}
+            sendData={sendData}
           >
             <Form>
               <Row>
                 <Col>
                   <Form.Group className="mb-3" controlId="seatForm.name">
-                    <Form.Control type="text" placeholder="Nama" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Nama"
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group className="mb-3" controlId="seatForm.telephone">
-                    <Form.Control type="text" placeholder="Telepon" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Telepon"
+                      onChange={(e) => setTelephone(e.target.value)}
+                    />
                   </Form.Group>
                 </Col>
               </Row>
