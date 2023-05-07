@@ -53,6 +53,15 @@ function orderReducer(order, action) {
         dateData: order.dateData,
       };
     }
+    case 'delete-all-change': {
+      return {
+        seatData: order.seatData,
+        studioData: order.studioData,
+        id: order.id,
+        totalTicket: order.totalTicket,
+        dateData: order.dateData,
+      };
+    }
     default: {
       throw Error('Unknown action: ' + action.type);
     }

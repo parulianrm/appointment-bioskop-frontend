@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Col, Container, Row } from 'react-bootstrap';
 import DescriptionSection from '../components/ticket-booking/DescriptionSection';
 import PickDateSection from '../components/ticket-booking/PickDateSection';
@@ -18,17 +19,29 @@ export default function TicketBooking() {
   let totalTicket = order.totalTicket;
 
   const [data, setData] = useState({});
+
   let params = useParams();
 
   function sendData() {
-    navigate('/pick-seat', {
-      state: {
-        data: {
+    const checkObjectEmpty = (obj) => Object.keys(obj).length === 0;
+
+    if (
+      !checkObjectEmpty(studioData) &&
+      !checkObjectEmpty(dateData) &&
+      totalTicket !== ''
+    ) {
+      console.log(studioData);
+      console.log(dateData);
+      console.log(totalTicket);
+      navigate('/pick-seat', {
+        state: {
+          isAuthentication: true,
           filmData: data,
           orderData: order,
+          totalTicket: totalTicket,
         },
-      },
-    });
+      });
+    }
   }
 
   function fetchDetailData() {
@@ -47,6 +60,7 @@ export default function TicketBooking() {
 
   useEffect(() => {
     fetchDetailData();
+    dispatch({ type: 'delete-all-change' });
   }, []);
 
   return (

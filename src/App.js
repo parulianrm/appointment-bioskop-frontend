@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Header from './components/homepage/Header';
 import DashboardAdminPage from './pages/DashboardAdminPage';
-import { useState } from 'react';
 import { OrderProvider } from './context/orderContext';
+import ProtectedRoute from './pages/utils/ProtectedRoute';
+import ForbiddenPage from './pages/ForbiddenPage';
 
 function App() {
   return (
@@ -15,11 +16,19 @@ function App() {
       <OrderProvider>
         <Header />
         <Routes>
+          <Route path="/forbidden-page" element={<ForbiddenPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/book-ticket/*">
             <Route path=":id" element={<TicketBooking />} />
           </Route>
-          <Route path="/pick-seat" element={<PickSeat />} />
+          <Route
+            path="/pick-seat"
+            element={
+              <ProtectedRoute>
+                <PickSeat />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/admin" element={<DashboardAdminPage />} />
         </Routes>
       </OrderProvider>
