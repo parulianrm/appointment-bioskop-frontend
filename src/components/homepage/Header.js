@@ -1,35 +1,55 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Link, useNavigate } from "react-router-dom";
+import "./Header.css";
+import logo from "../../assets/images/logo.png";
 
 function Header() {
-  const navigate = useNavigate();
-  function changePage(url) {
-    navigate(url);
-  }
+    const navigate = useNavigate();
 
-  return (
-    <Navbar bg="transperant" expand="lg" className="d-flex">
-      <Container>
-        <Navbar.Brand href="#home">
-          JagooIT MOVIE TICKET ONLINE BOOKING
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link onClick={() => changePage('/')}>Home</Nav.Link>
-            <Nav.Link onClick={() => changePage('/book-ticket')}>
-              About
-            </Nav.Link>
-            <Nav.Link onClick={() => changePage('/pick-seat')}>
-              Booking Now
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
+    function changePage(url) {
+        navigate(url);
+    }
+
+    return (
+        <React.StrictMode>
+            <Navbar
+                onClick={() => changePage("/")}
+                bg="transperant"
+                expand="lg"
+                className="header d-flex"
+            >
+                <Container className="headerLeft">
+                    <Navbar.Brand href="#home">
+                        <img
+                            src={logo}
+                            width="250"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="Brand Logo"
+                        />
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="ms-auto">
+                            <Nav.Link onClick={() => changePage("/")}>
+                                <span>Home</span>
+                            </Nav.Link>
+                            <Nav.Link onClick={() => changePage("/book-ticket")}>
+                                {" "}
+                                <span> About </span>
+                            </Nav.Link>
+                            <Nav.Link onClick={() => changePage("/pick-seat")}>
+                                <span>Booking Ticket</span>
+                            </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </React.StrictMode>
+    );
 }
 
 export default Header;

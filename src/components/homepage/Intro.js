@@ -1,32 +1,60 @@
-import React from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import bioskopPict from '../../assets/images/bioskop.jpg';
+import React, { useEffect, useState } from "react";
+import "./Intro.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const Intro = () => {
-  return (
-    <Container className="bg">
-      <Row>
-        <Col md={6} className="mb-3" style={{ marginTop: '80px' }}>
-          <h1 style={{ textAlign: 'left', fontWeight: 'bold' }}>
-            Booking Tiket Nonton Gak Pake Repot!
-          </h1>
-          <p style={{ textAlign: 'left', display: 'block' }}>
-            JagooIT adalah situs web pemesanan tiket bioskop online yang
-            memudahkan Anda untuk memilih dan memesan tiket film yang ingin Anda
-            tonton. Dapatkan pengalaman menonton film yang lebih menyenangkan
-            dengan pemesanan tiket online JagooIT.
-          </p>
-          <Button variant="primary">Pilih Film</Button>{' '}
-          <Button variant="secondary">Contact Admin</Button>
-        </Col>
-        <Col md={6}>
-          <Card style={{ marginTop: '50px' }}>
-            <Card.Img className="" variant="end-start" src={bioskopPict} />
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-  );
+    const [popularMovies, setPopularMovies] = useState([]);
+
+    useEffect(() => {
+        fetch(
+            "https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US"
+        )
+            .then((res) => res.json())
+            .then((data) => setPopularMovies(data.results));
+    }, []);
+
+    return (
+        <>
+            <div className="poster">
+                <Carousel
+                    showThumbs={false}
+                    autoPlay={true}
+                    transitionTime={3}
+                    infiniteLoop={true}
+                    showStatus={false}
+                >
+                    {popularMovies.map((movie) => (
+                        <Link
+                            style={{ textDecoration: "none", color: "white" }}
+                            to={`/movie/${movie.id}`}
+                        >
+                            <div className="posterImage">
+                                <img
+                                    src={`https://image.tmdb.org/t/p/original${
+                                        movie && movie.backdrop_path
+                                    }`}
+                                />
+                            </div>
+                            <div className="posterImage__overlay">
+                                <div className="posterImage__title">
+                                    {movie ? movie.original_title : ""}
+                                </div>
+                                <div className="posterImage__description">
+                                    {movie ? movie.overview : ""}
+                                </div>
+                                <Button variant="primary" className="w-30">
+                                    BUY TICKET
+                                </Button>
+                            </div>
+                        </Link>
+                    ))}
+                </Carousel>
+            </div>
+        </>
+    );
 };
 
 export default Intro;
