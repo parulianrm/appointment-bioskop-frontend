@@ -1,12 +1,18 @@
+import { useOrder, useOrderDispatch } from '../../context/orderContext';
 import ButtonCustom from './ButtonCustom';
 
-export default function OptionWrapper({
-  title,
-  optionsData,
-  studioData,
-  changeSelectedData,
-  studio,
-}) {
+export default function OptionWrapper({ title, optionsData, studio }) {
+  let order = useOrder();
+  let studioData = order.studioData;
+
+  const dispatch = useOrderDispatch();
+  const changeSelectedData = (id, studio, time) => {
+    dispatch({
+      type: 'added-studio',
+      data: { id, studio, time },
+    });
+  };
+
   return (
     <>
       <h4 style={{ textAlign: 'left', fontWeight: 'bold' }}>{title}</h4>

@@ -1,0 +1,25 @@
+.my-table {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.my-table th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+}
+
+.my-table td,
+.my-table th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.my-table td {
+  font-size: 14px;
+  text-align: left;
+}

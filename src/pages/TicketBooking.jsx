@@ -6,40 +6,29 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BookingResult from '../components/ticket-booking/BookingResult';
+import { useOrder, useOrderDispatch } from '../context/orderContext';
 
 export default function TicketBooking() {
   const navigate = useNavigate();
+  const dispatch = useOrderDispatch();
+  let order = useOrder();
+
+  let dateData = order.dateData;
+  let studioData = order.studioData;
+  let totalTicket = order.totalTicket;
+
   const [data, setData] = useState({});
   let params = useParams();
 
-  const [dateData, setDateData] = useState({
-    id: 0,
-    date: '',
-    day: '',
-  });
-
-  function changeDateData(id, date, day) {
-    setDateData({
-      id,
-      date,
-      day,
-    });
-  }
-
-  const [studioData, setStudioData] = useState({
-    id: 0,
-    studio: '',
-    time: '',
-  });
-
-  function changeStudioData(id, studio, time) {
-    setStudioData({ id, studio, time });
-  }
-
-  const [totalTicket, setTotalTicket] = useState(0);
-
   function sendData() {
-    console.log(totalTicket, studioData, dateData, params.id);
+    navigate('/pick-seat', {
+      state: {
+        data: {
+          filmData: data,
+          orderData: order,
+        },
+      },
+    });
   }
 
   function fetchDetailData() {
@@ -63,19 +52,10 @@ export default function TicketBooking() {
   return (
     <Container className="mb-5 pb-5">
       <DescriptionSection data={data} />
-      <PickDateSection
-        data={data}
-        dateData={dateData}
-        changeDateData={changeDateData}
-      />
+      <PickDateSection />
       <Row className="mt-5 pt-2">
         <Col md={7}>
-          <PickOptionSection
-            data={data}
-            studioData={studioData}
-            dateData={dateData}
-            changeStudioData={changeStudioData}
-          />
+          <PickOptionSection studioData={studioData} />
         </Col>
         <Col md={5}>
           <BookingResult
@@ -92,16 +72,18 @@ export default function TicketBooking() {
                 : 'Pilih studio terlebih dahulu'
             }
             thirdCol={
-              dateData.id
+              studioData.id
                 ? `Jam ${studioData.time} WIB`
-                : 'Pilih tanggal terlebih dahulu'
+                : 'Pilih studio terlebih dahulu'
             }
           >
             <select
               className="form-select"
               aria-label="Default select example"
               value={totalTicket}
-              onChange={(e) => setTotalTicket(e.target.value)}
+              onChange={(e) =>
+                dispatch({ type: 'added-total-ticket', data: e.target.value })
+              }
             >
               <option value="">Jumlah Tiket</option>
               <option value={1}>1</option>

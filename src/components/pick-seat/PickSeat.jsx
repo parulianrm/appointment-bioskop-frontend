@@ -2,8 +2,13 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import BookingResult from '../ticket-booking/BookingResult';
 import { Container } from 'react-bootstrap';
 import flowerPic from '../../assets/images/flower-pict.jpg';
+import { useLocation } from 'react-router-dom';
 
 export default function PickSeat() {
+  const location = useLocation();
+  const filmData = location.state?.data?.filmData;
+  const orderData = location.state?.data?.orderData;
+
   const col = 8;
   const row = 5;
 
@@ -64,7 +69,12 @@ export default function PickSeat() {
           </div>
         </Col>
         <Col md={5}>
-          <BookingResult imgUrl={flowerPic}>
+          <BookingResult
+            imgUrl={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
+            firstCol={`${orderData.dateData.day}, ${orderData.dateData.date} 2023`}
+            secondCol={`Studio ${orderData.studioData.studio}`}
+            thirdCol={`Jam ${orderData.studioData.time} WIB`}
+          >
             <Form>
               <Row>
                 <Col>

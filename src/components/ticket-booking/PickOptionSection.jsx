@@ -1,15 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 import OptionWrapper from './OptionWrapper';
-import BookingResult from './BookingResult';
 
-export default function PickOptionSection({
-  data,
-  studioData,
-  changeStudioData,
-}) {
-  function changeSelectedData(id, studio, time) {
-    changeStudioData(id, studio, time);
-  }
+export default function PickOptionSection({ studioData }) {
   return (
     <>
       <Row>
@@ -43,8 +35,6 @@ export default function PickOptionSection({
             <OptionWrapper
               title="Studio Reguler Rp.50.000"
               studio="Studio Regular"
-              studioData={studioData}
-              changeSelectedData={changeSelectedData}
               optionsData={[
                 {
                   id: 1,
@@ -64,8 +54,6 @@ export default function PickOptionSection({
           <Row className="mt-4">
             <OptionWrapper
               title="Studio Executive Premier Rp.70.000"
-              studioData={studioData}
-              changeSelectedData={changeSelectedData}
               studio="Studio Executive Premier"
               optionsData={[
                 {
@@ -86,8 +74,6 @@ export default function PickOptionSection({
           <Row className="mt-4">
             <OptionWrapper
               title="Studio 5D Dolby Atmos Rp.95.000"
-              studioData={studioData}
-              changeSelectedData={changeSelectedData}
               studio="5D Dolby Atmos"
               optionsData={[
                 {

@@ -1,13 +1,23 @@
 import { Card } from 'react-bootstrap';
 import ButtonCustom from './ButtonCustom';
+import { useOrder, useOrderDispatch } from '../../context/orderContext';
 
-export default function PickDate({
-  date,
-  day,
-  dateData,
-  id,
-  changeSelectedData,
-}) {
+export default function PickDate({ date, day, id }) {
+  let order = useOrder();
+  let dateData = order.dateData;
+
+  const dispatch = useOrderDispatch();
+  const changeSelectedData = (id, date, day) => {
+    dispatch({
+      type: 'added-date',
+      data: {
+        id,
+        date,
+        day,
+      },
+    });
+  };
+
   return (
     <Card>
       <Card.Header>{day}</Card.Header>
