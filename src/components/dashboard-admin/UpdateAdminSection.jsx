@@ -11,6 +11,8 @@ export default function UpdateAdminSection() {
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const [idFilm, setIdFilm] = useState('');
+  const [seatBooked, setSeatBooked] = useState([]);
   const [seat, setSeat] = useState([]);
   const [name, setName] = useState('');
   const [telephone, setTelephone] = useState('');
@@ -23,6 +25,14 @@ export default function UpdateAdminSection() {
         console.log(result);
         setOrderData(result.data);
         setSeat(result.data.kursi.split('|'));
+
+        getBookedTicket({
+          id_film: result.data.id_film,
+          nama_studio: result.data.nama_studio,
+          jam: result.data.jam,
+          tanggal: result.data.tanggal,
+          seat: result.data.kursi.split('|'),
+        });
         setName(result.data.nama);
         setTelephone(result.data.telephone);
       });
@@ -44,6 +54,37 @@ export default function UpdateAdminSection() {
         if (result.data.status === 'Ok') {
           navigate('/admin');
         }
+      });
+  };
+
+  const getBookedTicket = async ({
+    id_film,
+    nama_studio,
+    jam,
+    tanggal,
+    seat,
+  }) => {
+    await axios
+      .get(`http://localhost:3000/order/booked-ticket`, {
+        params: {
+          id_film,
+          nama_studio,
+          jam,
+          tanggal,
+        },
+      })
+      .then((result) => {
+        let kursiArray = result.data.kursi_booked.split('|');
+        setSeatBooked(
+          kursiArray.map((value) => {
+            if (
+              value !== '' &&
+              !seat.find((valueData) => valueData === value)
+            ) {
+              return value;
+            }
+          })
+        );
       });
   };
 
@@ -85,8 +126,11 @@ export default function UpdateAdminSection() {
               rows={6}
               cols={8}
               seat={seat}
+              seatBooked={seatBooked}
               pickSeatServe={orderData.jumlah_kursi}
-              changeSeatData={(dataSeat) => setSeat(dataSeat)}
+              changeSeatData={(dataSeat) => {
+                setSeat(dataSeat);
+              }}
             />
           </div>
           <div className="info-confirm mt-4">

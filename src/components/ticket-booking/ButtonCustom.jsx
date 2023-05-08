@@ -8,6 +8,7 @@ const Button = ({
   color = 'blue',
   disabled,
   customSize,
+  e,
 }) => {
   const getSizeClassName = (size) => {
     switch (size) {

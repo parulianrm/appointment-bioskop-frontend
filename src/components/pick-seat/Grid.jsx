@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import ButtonCustom from '../ticket-booking/ButtonCustom';
 import './Button.css';
 
-const ButtonGrid = ({ pickSeatServe, rows, cols, changeSeatData, seat }) => {
+const ButtonGrid = ({
+  pickSeatServe,
+  rows,
+  cols,
+  changeSeatData,
+  seat,
+  seatBooked = ['F1', 'D7'],
+}) => {
   const buttonArray = [];
-  const seatBooked = ['F1', 'D7'];
 
   const buttonOnClick = (data, e) => {
+    console.log(e.target.classList);
     if (e.target.classList.contains('button--blue')) {
       if (seat.length < pickSeatServe) {
         changeSeatData([...seat, e.target.textContent]);
@@ -14,6 +21,7 @@ const ButtonGrid = ({ pickSeatServe, rows, cols, changeSeatData, seat }) => {
         e.target.classList.add('button--red');
       }
     } else if (e.target.classList.contains('button--red')) {
+      console.log(e.target.classList);
       e.target.classList.remove('button--red');
       e.target.classList.add('button--blue');
       if (seat.find((value) => value === e.target.textContent)) {
@@ -24,6 +32,8 @@ const ButtonGrid = ({ pickSeatServe, rows, cols, changeSeatData, seat }) => {
         );
       }
     }
+
+    console.log(seat);
   };
 
   function runSeat(stringData) {
@@ -32,6 +42,8 @@ const ButtonGrid = ({ pickSeatServe, rows, cols, changeSeatData, seat }) => {
     if (seatBooked.find((value) => value === stringData)) {
       color = 'green';
     } else if (seatBooked.find((value) => value !== stringData)) {
+      color = 'blue';
+    } else {
       color = 'blue';
     }
 
@@ -53,7 +65,6 @@ const ButtonGrid = ({ pickSeatServe, rows, cols, changeSeatData, seat }) => {
           color={(() => {
             return runSeat(stringData);
           })()}
-          disabled={seatBooked.find((value) => value === stringData)}
           className="btn"
           onClick={(e) => buttonOnClick(stringData, e)}
         >
