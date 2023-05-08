@@ -2,8 +2,7 @@
 // import Footer from '../components/homepage/Footer';
 import Intro from '../components/homepage/Intro';
 // import NowPlaying from '../components/homepage/NowPlaying';
-import MovieList from "../components/homepage/movieList";
-
+import MovieList from '../components/homepage/movieList';
 
 export default function HomePage() {
   return (
@@ -12,9 +11,8 @@ export default function HomePage() {
       <NowPlaying />
       <ComingSoon />
       <Footer /> */}
-    <Intro />
+      <Intro />
       <MovieList />
-
     </>
   );
 }

@@ -1,15 +1,15 @@
 import { useOrder, useOrderDispatch } from '../../context/orderContext';
 import ButtonCustom from './ButtonCustom';
 
-export default function OptionWrapper({ title, optionsData, studio }) {
+export default function OptionWrapper({ title, optionsData, studio, cost }) {
   let order = useOrder();
   let studioData = order.studioData;
 
   const dispatch = useOrderDispatch();
-  const changeSelectedData = (id, studio, time) => {
+  const changeSelectedData = (id, studio, time, cost) => {
     dispatch({
       type: 'added-studio',
-      data: { id, studio, time },
+      data: { id, studio, time, cost },
     });
   };
 
@@ -22,7 +22,9 @@ export default function OptionWrapper({ title, optionsData, studio }) {
             key={index}
             size="medium"
             color={studioData.id === value.id ? 'green' : 'blue'}
-            onClick={() => changeSelectedData(value.id, studio, value.time)}
+            onClick={() =>
+              changeSelectedData(value.id, studio, value.time, cost)
+            }
           >
             {value.time}
           </ButtonCustom>

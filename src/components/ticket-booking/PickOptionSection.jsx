@@ -35,6 +35,7 @@ export default function PickOptionSection({ studioData }) {
             <OptionWrapper
               title="Studio Reguler Rp.50.000"
               studio="Studio Regular"
+              cost={50000}
               optionsData={[
                 {
                   id: 1,
@@ -55,6 +56,7 @@ export default function PickOptionSection({ studioData }) {
             <OptionWrapper
               title="Studio Executive Premier Rp.70.000"
               studio="Studio Executive Premier"
+              cost={70000}
               optionsData={[
                 {
                   id: 4,
@@ -74,6 +76,7 @@ export default function PickOptionSection({ studioData }) {
           <Row className="mt-4">
             <OptionWrapper
               title="Studio 5D Dolby Atmos Rp.95.000"
+              cost={95000}
               studio="5D Dolby Atmos"
               optionsData={[
                 {

@@ -26,6 +26,23 @@ const ButtonGrid = ({ pickSeatServe, rows, cols, changeSeatData, seat }) => {
     }
   };
 
+  function runSeat(stringData) {
+    let color = '';
+
+    if (seatBooked.find((value) => value === stringData)) {
+      color = 'green';
+    } else if (seatBooked.find((value) => value !== stringData)) {
+      color = 'blue';
+    }
+
+    seat.forEach(() => {
+      if (seat.find((value) => value === stringData)) {
+        color = 'red';
+      }
+    });
+    return color;
+  }
+
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const id = i * cols + j;
@@ -33,9 +50,9 @@ const ButtonGrid = ({ pickSeatServe, rows, cols, changeSeatData, seat }) => {
       buttonArray.push(
         <ButtonCustom
           key={id}
-          color={
-            seatBooked.find((value) => value === stringData) ? 'green' : 'blue'
-          }
+          color={(() => {
+            return runSeat(stringData);
+          })()}
           disabled={seatBooked.find((value) => value === stringData)}
           className="btn"
           onClick={(e) => buttonOnClick(stringData, e)}

@@ -55,11 +55,11 @@ function orderReducer(order, action) {
     }
     case 'delete-all-change': {
       return {
-        seatData: order.seatData,
-        studioData: order.studioData,
-        id: order.id,
-        totalTicket: order.totalTicket,
-        dateData: order.dateData,
+        seatData: {},
+        studioData: {},
+        id: 0,
+        totalTicket: {},
+        dateData: {},
       };
     }
     default: {

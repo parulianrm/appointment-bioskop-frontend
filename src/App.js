@@ -9,6 +9,7 @@ import DashboardAdminPage from './pages/DashboardAdminPage';
 import { OrderProvider } from './context/orderContext';
 import ProtectedRoute from './pages/utils/ProtectedRoute';
 import ForbiddenPage from './pages/ForbiddenPage';
+import UpdateAdminSection from './components/dashboard-admin/UpdateAdminSection';
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
             }
           />
           <Route path="/admin" element={<DashboardAdminPage />} />
+          <Route path="/update-booking/*">
+            <Route path=":id" element={<UpdateAdminSection />} />
+          </Route>
         </Routes>
       </OrderProvider>
     </div>

@@ -30,9 +30,6 @@ export default function TicketBooking() {
       !checkObjectEmpty(dateData) &&
       totalTicket !== ''
     ) {
-      console.log(studioData);
-      console.log(dateData);
-      console.log(totalTicket);
       navigate('/pick-seat', {
         state: {
           isAuthentication: true,
@@ -50,7 +47,6 @@ export default function TicketBooking() {
         `https://api.themoviedb.org/3/movie/${params.id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
       )
       .then((result) => {
-        console.log(result);
         setData(result.data);
       })
       .catch((err) => {

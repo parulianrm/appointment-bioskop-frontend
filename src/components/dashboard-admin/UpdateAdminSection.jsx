@@ -2,34 +2,39 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import BookingResult from '../ticket-booking/BookingResult';
 import { Container } from 'react-bootstrap';
 import ButtonCustom from '../ticket-booking/ButtonCustom';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Grid from './Grid';
+import Grid from '../pick-seat/Grid';
 import axios from 'axios';
 
-export default function PickSeat() {
+export default function UpdateAdminSection() {
+  const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [seat, setSeat] = useState([]);
   const [name, setName] = useState('');
   const [telephone, setTelephone] = useState('');
+  const [orderData, setOrderData] = useState({ kursi: '' });
 
-  let filmData = location.state?.filmData;
-  let orderData = location.state?.orderData;
-  let pickSeatServe = orderData.totalTicket;
-
-  async function sendData() {
+  const getOrderById = async () => {
     await axios
-      .post('http://localhost:3000/order/create', {
-        tanggal: `${orderData.dateData.date} 2023`,
-        id_film: `${filmData.id}`,
-        nama_film: filmData.title,
-        nama_studio: orderData.studioData.studio,
-        jam: orderData.studioData.time,
-        jumlah_kursi: Number(pickSeatServe),
-        telephone: telephone,
-        biaya_total: orderData.studioData.cost,
+      .get(`http://localhost:3000/order/${params.id}`)
+      .then((result) => {
+        console.log(result);
+        setOrderData(result.data);
+        setSeat(result.data.kursi.split('|'));
+        setName(result.data.nama);
+        setTelephone(result.data.telephone);
+      });
+  };
+
+  const sendData = async () => {
+    await axios
+      .put(`http://localhost:3000/order/update/${params.id}`, {
         nama: name,
+        telephone: telephone,
+        statusPaymentId: 0,
+        statusId: 1,
         kursi: seat.reduce((previous, current) => {
           return `${previous}|${current}`;
         }),
@@ -37,10 +42,33 @@ export default function PickSeat() {
       .then((result) => {
         console.log(result);
         if (result.data.status === 'Ok') {
-          navigate('/');
+          navigate('/admin');
         }
       });
-  }
+  };
+
+  const cancelOrder = async () => {
+    await axios
+      .put(`http://localhost:3000/order/update/${params.id}`, {
+        nama: name,
+        telephone: telephone,
+        statusPaymentId: 0,
+        statusId: 0,
+        kursi: seat.reduce((previous, current) => {
+          return `${previous}|${current}`;
+        }),
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.data.status === 'Ok') {
+          navigate('/admin');
+        }
+      });
+  };
+
+  useEffect(() => {
+    getOrderById();
+  }, []);
 
   return (
     <Container className="pt-5 mt-4">
@@ -50,14 +78,14 @@ export default function PickSeat() {
             style={{ textAlign: 'left', fontWeight: 'bold' }}
             className="mb-5"
           >
-            Pilih total {pickSeatServe - seat.length} Kursi
+            Pilih total {orderData.jumlah_kursi - seat.length} Kursi
           </h3>
           <div className="seat-container-option">
             <Grid
               rows={6}
               cols={8}
               seat={seat}
-              pickSeatServe={pickSeatServe}
+              pickSeatServe={orderData.jumlah_kursi}
               changeSeatData={(dataSeat) => setSeat(dataSeat)}
             />
           </div>
@@ -80,11 +108,25 @@ export default function PickSeat() {
         </Col>
         <Col md={5}>
           <BookingResult
-            imgUrl={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
-            firstCol={`${orderData.dateData.day}, ${orderData.dateData.date} 2023`}
-            secondCol={`Studio ${orderData.studioData.studio}`}
-            thirdCol={`Jam ${orderData.studioData.time} WIB`}
+            // imgUrl={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
+            firstCol={`${orderData.tanggal}`}
+            secondCol={`Studio ${orderData.nama_studio}`}
+            thirdCol={`Jam ${orderData.jam} WIB`}
             sendData={sendData}
+            submitElement={
+              <div className="d-flex gap-2">
+                <Button variant="primary" size="md" onClick={() => sendData()}>
+                  Submit Data
+                </Button>
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={() => cancelOrder()}
+                >
+                  Cancel Booking
+                </Button>
+              </div>
+            }
           >
             <Form>
               <Row>
@@ -93,6 +135,7 @@ export default function PickSeat() {
                     <Form.Control
                       type="text"
                       placeholder="Nama"
+                      value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </Form.Group>
@@ -102,6 +145,7 @@ export default function PickSeat() {
                     <Form.Control
                       type="text"
                       placeholder="Telepon"
+                      value={telephone}
                       onChange={(e) => setTelephone(e.target.value)}
                     />
                   </Form.Group>

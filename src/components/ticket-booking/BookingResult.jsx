@@ -8,6 +8,7 @@ export default function BookingResult({
   secondCol,
   thirdCol,
   sendData,
+  submitElement,
 }) {
   let picture = imgUrl ? imgUrl : null;
   return (
@@ -20,9 +21,13 @@ export default function BookingResult({
           <ListGroup.Item>{thirdCol}</ListGroup.Item>
           <ListGroup.Item>{children}</ListGroup.Item>
           <ListGroup.Item>
-            <Button variant="primary" size="lg" onClick={() => sendData()}>
-              Lanjut Bayar
-            </Button>
+            {submitElement ? (
+              submitElement
+            ) : (
+              <Button variant="primary" size="lg" onClick={() => sendData()}>
+                Submit Data
+              </Button>
+            )}
           </ListGroup.Item>
         </ListGroup>
       </Card>
