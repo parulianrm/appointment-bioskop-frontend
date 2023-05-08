@@ -13,6 +13,7 @@ export default function PickSeat() {
   const [seat, setSeat] = useState([]);
   const [name, setName] = useState('');
   const [telephone, setTelephone] = useState('');
+  const [seatBooked, setSeatBooked] = useState([]);
 
   let filmData = location.state?.filmData;
   let orderData = location.state?.orderData;
@@ -42,21 +43,65 @@ export default function PickSeat() {
       });
   }
 
+  const getBookedTicket = async ({
+    id_film,
+    nama_studio,
+    jam,
+    tanggal,
+    seat,
+  }) => {
+    console.log(id_film, nama_studio, jam, tanggal, seat);
+    await axios
+      .get(`http://localhost:3000/order/booked-ticket`, {
+        params: {
+          id_film,
+          nama_studio,
+          jam,
+          tanggal,
+        },
+      })
+      .then((result) => {
+        let kursiArray = result.data.kursi_booked.split('|');
+        console.log(result);
+        setSeatBooked(
+          kursiArray.map((value) => {
+            if (
+              value !== '' &&
+              !seat.find((valueData) => valueData === value)
+            ) {
+              return value;
+            }
+          })
+        );
+      });
+  };
+
+  useEffect(() => {
+    getBookedTicket({
+      id_film: filmData.id,
+      nama_studio: orderData.studioData.studio,
+      jam: orderData.studioData.time,
+      tanggal: `${orderData.dateData.date} 2023`,
+      seat: [],
+    });
+  }, []);
+
   return (
-    <Container className="pt-5 mt-4">
+    <Container className="pt-5 mt-4 pb-5 mb-5">
       <Row className="mt-4">
         <Col md={7} className="px-5">
           <h3
-            style={{ textAlign: 'left', fontWeight: 'bold' }}
-            className="mb-5"
+            style={{ textAlign: 'center', fontWeight: 'bold', color: 'white' }}
+            className="mb-3"
           >
-            Pilih total {pickSeatServe - seat.length} Kursi
+            Pilih - {pickSeatServe - seat.length} Kursi
           </h3>
           <div className="seat-container-option">
             <Grid
               rows={6}
               cols={8}
               seat={seat}
+              seatBooked={seatBooked}
               pickSeatServe={pickSeatServe}
               changeSeatData={(dataSeat) => setSeat(dataSeat)}
             />
@@ -84,7 +129,15 @@ export default function PickSeat() {
             firstCol={`${orderData.dateData.day}, ${orderData.dateData.date} 2023`}
             secondCol={`Studio ${orderData.studioData.studio}`}
             thirdCol={`Jam ${orderData.studioData.time} WIB`}
+            forthCol={`Pilihan Kursi : ${seat}`}
             sendData={sendData}
+            submitElement={
+              <div className="d-flex gap-2">
+                <Button variant="primary" size="md" onClick={() => sendData()}>
+                  Lanjut Bayar
+                </Button>
+              </div>
+            }
           >
             <Form>
               <Row>

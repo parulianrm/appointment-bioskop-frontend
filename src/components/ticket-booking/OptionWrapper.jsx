@@ -16,7 +16,7 @@ export default function OptionWrapper({ title, optionsData, studio, cost }) {
   return (
     <>
       <h4 style={{ textAlign: 'left', fontWeight: 'bold' }}>{title}</h4>
-      <div className="action-button d-flex gap-2 flex-wrap">
+      <div className="action-button d-flex gap-2 flex-wrap mb-3">
         {optionsData.map((value, index) => (
           <ButtonCustom
             key={index}

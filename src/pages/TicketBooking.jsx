@@ -63,7 +63,7 @@ export default function TicketBooking() {
     <Container className="mb-5 pb-5">
       <DescriptionSection data={data} />
       <PickDateSection />
-      <Row className="mt-5 pt-2">
+      <Row style={{ marginTop: '160px' }}>
         <Col md={7}>
           <PickOptionSection studioData={studioData} />
         </Col>

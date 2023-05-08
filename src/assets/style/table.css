@@ -1,8 +1,9 @@
 .my-table {
-  font-family: Arial, sans-serif;
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  color: white;
+  font-size: 16px;
 }
 
 .my-table th {
@@ -11,15 +12,18 @@
   font-weight: bold;
   padding: 10px;
   text-align: left;
+  color: white;
 }
 
 .my-table td,
 .my-table th {
   border: 1px solid #ddd;
   padding: 10px;
+  color: white;
 }
 
 .my-table td {
   font-size: 14px;
   text-align: left;
+  color: white;
 }

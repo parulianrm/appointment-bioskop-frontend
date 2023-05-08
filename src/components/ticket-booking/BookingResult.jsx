@@ -1,5 +1,4 @@
 import { Button, Card, ListGroup } from 'react-bootstrap';
-import flowerPict from '../../assets/images/flower-pict.jpg';
 
 export default function BookingResult({
   children,
@@ -8,6 +7,7 @@ export default function BookingResult({
   secondCol,
   thirdCol,
   sendData,
+  forthCol,
   submitElement,
 }) {
   let picture = imgUrl ? imgUrl : null;
@@ -19,6 +19,7 @@ export default function BookingResult({
           <ListGroup.Item>{firstCol}</ListGroup.Item>
           <ListGroup.Item>{secondCol}</ListGroup.Item>
           <ListGroup.Item>{thirdCol}</ListGroup.Item>
+          {forthCol ? <ListGroup.Item>{forthCol}</ListGroup.Item> : <></>}
           <ListGroup.Item>{children}</ListGroup.Item>
           <ListGroup.Item>
             {submitElement ? (

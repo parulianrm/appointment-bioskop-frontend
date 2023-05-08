@@ -112,11 +112,11 @@ export default function UpdateAdminSection() {
   }, []);
 
   return (
-    <Container className="pt-5 mt-4">
+    <Container className="pt-5 mt-3 pb-5">
       <Row className="mt-4">
         <Col md={7} className="px-5">
           <h3
-            style={{ textAlign: 'left', fontWeight: 'bold' }}
+            style={{ textAlign: 'center', fontWeight: 'bold', color: 'white' }}
             className="mb-5"
           >
             Pilih total {orderData.jumlah_kursi - seat.length} Kursi
@@ -156,6 +156,7 @@ export default function UpdateAdminSection() {
             firstCol={`${orderData.tanggal}`}
             secondCol={`Studio ${orderData.nama_studio}`}
             thirdCol={`Jam ${orderData.jam} WIB`}
+            forthCol={`Pilihan kursi : ${seat}`}
             sendData={sendData}
             submitElement={
               <div className="d-flex gap-2">

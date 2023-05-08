@@ -8,14 +8,23 @@ export default function PickDateSection() {
 
   return (
     <>
-      <Row className="mt-5 pt-2">
-        <h1 style={{ textAlign: 'left', fontWeight: 'bold' }}>Pilih Tanggal</h1>
+      <Row>
+        <h1
+          style={{
+            textAlign: 'left',
+            fontWeight: 'bold',
+            color: 'white',
+          }}
+        >
+          Pilih Tanggal
+        </h1>
         <div className="result-option text-left">
           <span
             style={{
               fontSize: '1.1rem',
               display: 'block',
               textAlign: 'left',
+              color: 'white',
             }}
           >
             Pilihan Tanggal :{' '}
@@ -25,7 +34,14 @@ export default function PickDateSection() {
           </span>
         </div>
       </Row>
-      <Row className="mt-4">
+      <Row
+        className="mt-3 w-100"
+        style={{
+          fontSize: '1.5rem',
+          fontStyle: 'bold',
+          textAlign: 'center',
+        }}
+      >
         <Col bg="secondary">
           <PickDate date="21 April" day="Senin" id={1} />
         </Col>
