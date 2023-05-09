@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, FormControl, Button } from 'react-bootstrap';
 
-const Search = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    onSearch(query);
+export default function SearchRow({ onSearch }) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const searchQuery = formData.get('search');
+    onSearch(searchQuery);
   };
 
   return (
-    <Form onSubmit={handleSearch} inline>
-      <Form.Control
+    <Form onSubmit={handleSubmit} className="d-flex">
+      <FormControl
         type="text"
+        name="search"
         placeholder="Search"
-        className="mr-sm-2"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        aria-label="Search"
+        style={{ marginRight: '8px' }}
       />
-      <Button type="submit" variant="outline-success">
+      <Button variant="primary" type="submit">
         Search
       </Button>
     </Form>
   );
-};
-
-export default Search;
+}

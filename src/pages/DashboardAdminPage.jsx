@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import Button from '../components/ticket-booking/ButtonCustom';
 import { useNavigate } from 'react-router-dom';
 import MultiSelect from '../components/Multiselect';
-import Search from '../components/SearchComp';
+import SearchRow from '../components/SearchComp';
 
 export default function DashboardAdminPage() {
   const navigate = useNavigate();
+  const [resultBookingData, setResultBookingData] = useState([]);
   const [summaryFilmData, setSummaryFilmData] = useState([
     { nama: 'John Doe' },
   ]);
@@ -18,13 +19,30 @@ export default function DashboardAdminPage() {
   ]);
 
   const [selectedItem, setSelectedItem] = useState(null);
+  const [queryItem, setQueryItem] = useState('');
+
+  const changeQueryItem = (item) => {
+    setQueryItem(item);
+    setResultBookingData(
+      bookingData.filter((value, index) => {
+        return value.film.includes(item);
+      })
+    );
+  };
+
   const handleItemClick = (item) => {
     setSelectedItem(item);
+    setResultBookingData(
+      bookingData.filter((value, index) => {
+        return value.nama_studio.includes(item.filterData);
+      })
+    );
   };
   const dropdownItems = [
-    { value: 1, label: 'Regular 2D' },
-    { value: 2, label: 'Executive Premier' },
-    { value: 3, label: '5D Dolby Atmos' },
+    { value: 0, label: 'Show All', filterData: '' },
+    { value: 1, label: 'Regular 2D', filterData: 'Regular 2D' },
+    { value: 2, label: 'Executive Premier', filterData: 'Executive Premier' },
+    { value: 3, label: '5D Dolby Atmos', filterData: '5D Dolby Atmos' },
   ];
 
   const getSummaryFilm = async () => {
@@ -59,6 +77,21 @@ export default function DashboardAdminPage() {
             id: value.id,
             tanggal: value.tanggal,
             film: value.nama_film,
+            nama_studio: value.nama_studio,
+            jam: value.jam,
+            nama: value.nama,
+            seat: value.kursi,
+            status: value.status,
+          };
+        })
+      );
+      setResultBookingData(
+        result.data.map((value, index) => {
+          return {
+            id: value.id,
+            tanggal: value.tanggal,
+            film: value.nama_film,
+            nama_studio: value.nama_studio,
             jam: value.jam,
             nama: value.nama,
             seat: value.kursi,
@@ -133,6 +166,9 @@ export default function DashboardAdminPage() {
                 onItemClick={handleItemClick}
               />
             </Col>
+            <Col>
+              <SearchRow onSearch={changeQueryItem} />
+            </Col>
           </Row>
           <Table className="my-table mt-4">
             <thead>
@@ -148,7 +184,10 @@ export default function DashboardAdminPage() {
               </tr>
             </thead>
             <tbody>
-              {bookingData.map((row, index) => (
+              {bookingData.filter((value, index) => {
+                return value.nama_studio === selectedItem;
+              })}
+              {resultBookingData.map((row, index) => (
                 <tr key={index}>
                   <td>{row.id}</td>
                   <td>{row.tanggal}</td>
