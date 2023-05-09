@@ -1,0 +1,55 @@
+.multiselect-container {
+  position: relative;
+  width: 200px;
+  display: block;
+  background-color: white;
+  border-radius: 40px;
+}
+
+.multiselect-selected-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+  cursor: pointer;
+}
+
+.multiselect-selected-values span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.multiselect-selected-values i {
+  font-size: 10px;
+}
+
+.multiselect-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.multiselect-option {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.multiselect-option input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+.multiselect-option label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
