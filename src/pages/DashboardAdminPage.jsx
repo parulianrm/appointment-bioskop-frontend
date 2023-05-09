@@ -25,7 +25,7 @@ export default function DashboardAdminPage() {
     setQueryItem(item);
     setResultBookingData(
       bookingData.filter((value, index) => {
-        return value.film.includes(item);
+        return value.film.toLowerCase().includes(item.toLowerCase());
       })
     );
   };
@@ -106,6 +106,7 @@ export default function DashboardAdminPage() {
     await axios
       .get('http://localhost:3000/order/summary-booking')
       .then((result) => {
+        console.log(result);
         setSummaryBookingData(
           result.data.map((value) => {
             return {
