@@ -48,7 +48,11 @@ function Header() {
             variant="primary"
             onClick={() => {
               handleClose();
-              changePage(`/update-booking/${idOrder}`);
+              navigate(`/update-booking/${idOrder}`, {
+                state: {
+                  from: 'home',
+                },
+              });
             }}
           >
             Cari Data Order

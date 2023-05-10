@@ -50,9 +50,14 @@ export default function UpdateAdminSection() {
         }),
       })
       .then((result) => {
-        console.log(result);
         if (result.data.status === 'Ok') {
-          navigate('/admin');
+          if (location.state?.from === 'admin') {
+            navigate('/admin');
+          } else if (location.state?.from === 'home') {
+            navigate('/');
+          } else {
+            navigate('/');
+          }
         }
       });
   };
@@ -102,7 +107,13 @@ export default function UpdateAdminSection() {
       .then((result) => {
         console.log(result);
         if (result.data.status === 'Ok') {
-          navigate('/admin');
+          if (location.state?.from === 'admin') {
+            navigate('/admin');
+          } else if (location.state?.from === 'home') {
+            navigate('/');
+          } else {
+            navigate('/');
+          }
         }
       });
   };
