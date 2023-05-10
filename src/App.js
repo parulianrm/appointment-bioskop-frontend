@@ -10,6 +10,8 @@ import { OrderProvider } from './context/orderContext';
 import ProtectedRoute from './pages/utils/ProtectedRoute';
 import ForbiddenPage from './pages/ForbiddenPage';
 import UpdateAdminSection from './components/dashboard-admin/UpdateAdminSection';
+import ModalComponent from './components/ModalComp';
+import { useState } from 'react';
 
 function App() {
   return (
