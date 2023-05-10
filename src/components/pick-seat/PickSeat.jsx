@@ -36,9 +36,17 @@ export default function PickSeat() {
         }),
       })
       .then((result) => {
-        console.log(result);
         if (result.data.status === 'Ok') {
-          navigate('/');
+          navigate('/', {
+            state: {
+              modal: {
+                show: true,
+                orderData: {
+                  ...result.data,
+                },
+              },
+            },
+          });
         }
       });
   }

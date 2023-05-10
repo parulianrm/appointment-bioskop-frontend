@@ -200,7 +200,13 @@ export default function DashboardAdminPage() {
                   <td>
                     <Button
                       size="small"
-                      onClick={() => navigate(`/update-booking/${row.id}`)}
+                      onClick={() =>
+                        navigate(`/update-booking/${row.id}`, {
+                          state: {
+                            from: 'admin',
+                          },
+                        })
+                      }
                     >
                       Update
                     </Button>
